@@ -2,6 +2,7 @@
 
 namespace Mvc\Http\Routing;
 
+use Mvc\Http\Request\Request;
 use Mvc\Http\Routing\Exceptions\RouterExceptions;
 
 class Router
@@ -10,11 +11,17 @@ class Router
 
     private static Route $routes;
 
-    public function __construct($path, Route $routes = null)
+    private Request $request;
+
+    public function __construct($path, Route $routes = null, Request $request = null)
     {
         $this->path = $path;
         if($routes)
             self::$routes = $routes;
+
+        if($request)
+            $this->request = $request;
+
     }
 
     //regex -> wyrażenia regularne
@@ -62,7 +69,7 @@ class Router
             foreach (self::$routes->getRoutes() as $route) {
                 if($this->matchRoute($route)) {
                     $this->setGetData($route);
-                    return call_user_func($route['action']);
+                    return call_user_func_array($route['action'], [$this->request]);
                 }
             }
             throw new RouterExceptions('No route found.');
