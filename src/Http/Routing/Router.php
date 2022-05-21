@@ -38,12 +38,32 @@ class Router
         return false;
     }
 
+    private function setGetData(array $route)
+    {
+        $trim = explode('{', $route['path']);
+        $parsedPath = preg_replace("#$trim[0]#",'', $this->path,1);
+
+        foreach($route['params'] as $param) {
+            preg_match("#[a-zA-Z0-9-]+#", $parsedPath,$results);
+            //$_GET[$param] = $results;
+            //to się dubluje, dlatego tworzymy tymczasowa ściężkę
+            $tempPath = explode($results[0],$parsedPath,2);
+            $parsedPath = $tempPath[1];
+
+            $_GET[$param] = $results[0];
+        }
+        //print_r($trim);
+        print_r($parsedPath);
+    }
+
     public function run()
     {
         try {
             foreach (self::$routes->getRoutes() as $route) {
-                if($this->matchRoute($route))
+                if($this->matchRoute($route)) {
+                    $this->setGetData($route);
                     return call_user_func($route['action']);
+                }
             }
             throw new RouterExceptions('No route found.');
         } catch (RouterExceptions $exception) {
