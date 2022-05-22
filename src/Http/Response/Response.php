@@ -5,6 +5,10 @@ declare(strict_types=1);
 namespace Mvc\Http\Response;
 
 use Mvc\Http\Response\Exceptions\ResponseExceptions;
+use Mvc\Providers\TwigServiceProvider;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class Response
 {
@@ -83,6 +87,25 @@ class Response
         $this->setHeaderHttpStatusMessage($code);
         $this->setHeaders($headers);
         echo $content;
+    }
+
+    public function view(string $name, array $data = [], int $code = 200, array $headers = [])
+    {
+        $twig = new TwigServiceProvider(config('twig'));
+        $view = $twig->provide();
+
+        $this->setHeaderHttpStatusMessage($code);
+        $this->setHeaders($headers);
+
+        try {
+            echo $view->render($name, $data);
+        } catch (LoaderError $e) {
+            exit($e->getMessage());
+        } catch (RuntimeError $e) {
+            exit($e->getMessage());
+        } catch (SyntaxError $e) {
+            exit($e->getMessage());
+        }
     }
 
     private function setHeaderHttpStatusMessage($code)
