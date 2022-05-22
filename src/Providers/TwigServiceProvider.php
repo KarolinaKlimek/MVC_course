@@ -2,12 +2,22 @@
 
 namespace Mvc\Providers;
 
+use Mvc\Messages\Messages;
 use Twig\Environment;
 use Twig\Loader\FilesystemLoader;
 use Twig\TwigFunction;
 
+
 class TwigServiceProvider extends ServiceProvider
 {
+
+    private Messages $messages;
+
+    public function __construct($config)
+    {
+        parent::__construct($config);
+        $this->messages = new Messages();
+    }
 
     public function provide(array $options = [])
     {
@@ -29,9 +39,14 @@ class TwigServiceProvider extends ServiceProvider
             return config($config);
         });
 
+        $functionMessage = new TwigFunction('__',function (string $message, array $params = []) {
+           return $this->messages->get($message,$params);
+        });
+
         $twig->addFunction($functionAsset);
         $twig->addFunction($functionCurrentYear);
         $twig->addFunction($functionConfig);
+        $twig->addFunction($functionMessage);
 
         return $twig;
     }

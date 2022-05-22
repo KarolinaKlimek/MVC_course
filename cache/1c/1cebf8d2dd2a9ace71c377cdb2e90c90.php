@@ -53,33 +53,9 @@ class __TwigTemplate_68659abcbca1ff129c0d905d30b96678 extends \Twig\Template
     <div>
         ";
         // line 5
-        $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(($context["entries"] ?? null));
-        foreach ($context['_seq'] as $context["_key"] => $context["entry"]) {
-            // line 6
-            echo "            ";
-            if ( !twig_get_attribute($this->env, $this->source, $context["entry"], "hidden", [], "any", false, false, false, 6)) {
-                // line 7
-                echo "            <div>
-                <h2>";
-                // line 8
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["entry"], "title", [], "any", false, false, false, 8), "html", null, true);
-                echo "</h2>
-                <p>";
-                // line 9
-                echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["entry"], "description", [], "any", false, false, false, 9), "html", null, true);
-                echo "</p>
-            </div>
-            ";
-            }
-            // line 12
-            echo "        ";
-        }
-        $_parent = $context['_parent'];
-        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['entry'], $context['_parent'], $context['loop']);
-        $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 13
-        echo "    </div>
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('__')->getCallable(), ["testParam", ["param" => "lorem ipsum33"]]), "html", null, true);
+        echo "
+    </div>
 ";
     }
 
@@ -95,7 +71,7 @@ class __TwigTemplate_68659abcbca1ff129c0d905d30b96678 extends \Twig\Template
 
     public function getDebugInfo()
     {
-        return array (  82 => 13,  76 => 12,  70 => 9,  66 => 8,  63 => 7,  60 => 6,  56 => 5,  50 => 3,  46 => 2,  35 => 1,);
+        return array (  56 => 5,  50 => 3,  46 => 2,  35 => 1,);
     }
 
     public function getSourceContext()
