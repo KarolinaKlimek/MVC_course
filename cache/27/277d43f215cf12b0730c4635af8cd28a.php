@@ -37,14 +37,20 @@ class __TwigTemplate_78d9d7ab68ef21f706d6254d19e1bf65 extends \Twig\Template
         $macros = $this->macros;
         // line 1
         echo "<!DOCTYPE html>
-<html lang=\"en\">
+<html lang=\"";
+        // line 2
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('config')->getCallable(), ["app.lang"]), "html", null, true);
+        echo "\">
 <head>
     <meta charset=\"utf-8\">
     <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
     <meta name=\"viewport\" content=\"width=device-width, initial-scale=1\">
-";
+    <link href=\"";
+        // line 7
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('asset')->getCallable(), ["css/main.css"]), "html", null, true);
+        echo "\" rel=\"stylesheet\" type=\"text/css\">
+    <title>";
         // line 8
-        echo "    <title>";
         echo twig_escape_filter($this->env, ($context["title"] ?? null), "html", null, true);
         echo "</title>
 
@@ -59,7 +65,14 @@ class __TwigTemplate_78d9d7ab68ef21f706d6254d19e1bf65 extends \Twig\Template
         // line 16
         $this->displayBlock('content', $context, $blocks);
         // line 19
-        echo "</div>
+        echo "    <footer>
+        Copyright kurs ";
+        // line 20
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('year')->getCallable(), []), "html", null, true);
+        echo " - all rights reserved.
+    </footer>
+
+</div>
 </body>
 ";
     }
@@ -94,7 +107,7 @@ class __TwigTemplate_78d9d7ab68ef21f706d6254d19e1bf65 extends \Twig\Template
 
     public function getDebugInfo()
     {
-        return array (  81 => 17,  77 => 16,  72 => 11,  68 => 10,  62 => 19,  60 => 16,  55 => 13,  53 => 10,  47 => 8,  39 => 1,);
+        return array (  94 => 17,  90 => 16,  85 => 11,  81 => 10,  71 => 20,  68 => 19,  66 => 16,  61 => 13,  59 => 10,  54 => 8,  50 => 7,  42 => 2,  39 => 1,);
     }
 
     public function getSourceContext()
