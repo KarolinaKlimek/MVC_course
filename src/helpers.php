@@ -14,7 +14,7 @@ function config(string $config)
 {
     $configs = require __DIR__ . '/../loaders/config.php';
     $configArray = explode( '.', $config);
-    
+
     try {
         if (isset($configs[$configArray[0]])) {
             $fromConfig = $configs[$configArray[0]];

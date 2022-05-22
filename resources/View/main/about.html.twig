@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+{% block content %}
+    <h1>{{ title }}</h1>
+    <div>
+        {% for entry in entries %}
+            {% if not  entry.hidden %}
+            <div>
+                <h2>{{ entry.title }}</h2>
+                <p>{{ entry.description }}</p>
+            </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+{% endblock %}
