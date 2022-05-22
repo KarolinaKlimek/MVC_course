@@ -6,5 +6,8 @@ use Mvc\Exceptions\ExceptionHandler;
 
 class RouterExceptions extends ExceptionHandler
 {
-
+    public function reportNoRouteFound()
+    {
+        response()->plank($this->getMessage(),404);
+    }
 }

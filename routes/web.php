@@ -7,10 +7,6 @@ use App\Http\Controllers;
 
 $routes = new Route();
 
-//zamiast tego uzywac ładujemy controller
-//$routes->set('/', function () {
-//    echo 'test';
-//});
 $routes->set('/', function () {
     Controllers\ExampleController::index();
 });
@@ -20,10 +16,7 @@ $routes->set('/contact', function () {
 });
 
 $routes->set('/entry/{id}', function (Request $request) {
-    //echo 'regex działa';
-    //print_r($_GET);
-    //echo $_GET['id'];
-    echo $request->post('id');
+    response()->json($request->getAll());
 }, ['id']);
 
 $router = new Router($_SERVER['REQUEST_URI'], $routes);

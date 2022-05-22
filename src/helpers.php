@@ -1,5 +1,6 @@
 <?php
 use Mvc\Exceptions\ExceptionHandler;
+use Mvc\Http\Response\Response;
 
 function env(string $key, $default)
 {
@@ -25,4 +26,9 @@ function config(string $config)
     } catch (ExceptionHandler $exception) {
         exit($exception->report());
     }
+}
+
+function response()
+{
+    return new Response();
 }

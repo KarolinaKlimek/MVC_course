@@ -59,8 +59,6 @@ class Router
 
             $_GET[$param] = $results[0];
         }
-        //print_r($trim);
-        print_r($parsedPath);
     }
 
     public function run()
@@ -74,7 +72,7 @@ class Router
             }
             throw new RouterExceptions('No route found.');
         } catch (RouterExceptions $exception) {
-            exit($exception->report());
+            exit($exception->reportNoRouteFound());
         }
     }
 }

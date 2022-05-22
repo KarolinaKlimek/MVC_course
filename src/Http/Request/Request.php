@@ -37,7 +37,11 @@ class Request
         return null;
     }
 
-    //zwraca całą tablicę GET
+    /**
+     * Returns get array.
+     *
+     * @return array
+     */
     public function getAll()
     {
         return $_GET;
@@ -60,7 +64,6 @@ class Request
             }
             return $body;
         }
-
         return null;
     }
 }
