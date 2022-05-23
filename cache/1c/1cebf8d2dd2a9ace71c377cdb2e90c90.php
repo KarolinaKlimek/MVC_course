@@ -53,7 +53,7 @@ class __TwigTemplate_68659abcbca1ff129c0d905d30b96678 extends \Twig\Template
     <div>
         ";
         // line 5
-        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('__')->getCallable(), ["testParam", ["param" => "lorem ipsum33"]]), "html", null, true);
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('__')->getCallable(), ["testParam", ["param" => "lorem ipsum."]]), "html", null, true);
         echo "
     </div>
 ";
