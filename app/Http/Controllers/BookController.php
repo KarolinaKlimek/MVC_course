@@ -50,4 +50,17 @@ class BookController
 
         return response()->view('Book/update.html.twig', ['title' => 'Add book', 'book' => $book]);
     }
+
+    public static function destroy(Request $request)
+    {
+        $entityManager = getEntityManager();
+        $book = $entityManager->getRepository('App\\Models\\Books')->find($request->get('id'));
+
+        if($book) {
+            $entityManager->remove($book);
+            $entityManager->flush();
+        }
+
+        return response()->redirect('/');
+    }
 }

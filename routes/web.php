@@ -19,4 +19,8 @@ $routes->set('/books/update/{id}', function (Request $request) {
     Controllers\BookController::update($request);
 }, ['id']);
 
+$routes->set('/books/destroy/{id}', function (Request $request) {
+    Controllers\BookController::destroy($request);
+}, ['id']);
+
 $router = new Router($_SERVER['REQUEST_URI'], $routes);

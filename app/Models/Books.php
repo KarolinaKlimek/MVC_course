@@ -18,7 +18,7 @@ class Books
      * @ORM\Column(type="integer")
      * @ORM\GeneratedValue()
      */
-    protected int $id;
+    protected ?int $id;
 
     /**
      * @var string
@@ -41,9 +41,9 @@ class Books
     }
 
     /**
-     * @return int
+     * @return int|null
      */
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }

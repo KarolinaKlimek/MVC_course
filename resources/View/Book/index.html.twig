@@ -8,7 +8,8 @@
             <div>
                 <h2>{{ book.name }}</h2>
                 <p>{{ book.description }}</p>
-                <a href="/books/update/{{ book.id }}">Update</a>
+                <a href="/books/update/{{ book.id }}">Update</a> |
+                <a href="/books/destroy/{{ book.id }}">Delete</a>
             </div>
         {% endfor %}
     </div>
