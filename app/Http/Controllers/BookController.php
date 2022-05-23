@@ -33,4 +33,21 @@ class BookController
 
         return response()->view('Book/create.html.twig', ['title' => 'Add book']);
     }
+
+    public static function update(Request $request)
+    {
+        $entityManager = getEntityManager();
+        $book = $entityManager->getRepository('App\\Models\\Books')->find($request->get('id'));
+
+        if($book && !empty($request->postAll())) {
+            $book->setName($request->post('name'));
+            $book->setDescription($request->post('description'));
+
+            $entityManager->flush($book);
+
+            return response()->redirect('/');
+        }
+
+        return response()->view('Book/update.html.twig', ['title' => 'Add book', 'book' => $book]);
+    }
 }

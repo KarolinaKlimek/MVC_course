@@ -65,13 +65,17 @@ class __TwigTemplate_9362448fa322300331fbc82100235d98 extends \Twig\Template
             // line 10
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["book"], "description", [], "any", false, false, false, 10), "html", null, true);
             echo "</p>
+                <a href=\"/books/update/";
+            // line 11
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["book"], "id", [], "any", false, false, false, 11), "html", null, true);
+            echo "\">Update</a>
             </div>
         ";
         }
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['book'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 13
+        // line 14
         echo "    </div>
 ";
     }
@@ -88,7 +92,7 @@ class __TwigTemplate_9362448fa322300331fbc82100235d98 extends \Twig\Template
 
     public function getDebugInfo()
     {
-        return array (  75 => 13,  66 => 10,  62 => 9,  59 => 8,  55 => 7,  50 => 4,  46 => 3,  35 => 1,);
+        return array (  79 => 14,  70 => 11,  66 => 10,  62 => 9,  59 => 8,  55 => 7,  50 => 4,  46 => 3,  35 => 1,);
     }
 
     public function getSourceContext()

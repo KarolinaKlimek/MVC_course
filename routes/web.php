@@ -15,5 +15,8 @@ $routes->set('/books/create', function (Request $request) {
     Controllers\BookController::create($request);
 });
 
+$routes->set('/books/update/{id}', function (Request $request) {
+    Controllers\BookController::update($request);
+}, ['id']);
 
 $router = new Router($_SERVER['REQUEST_URI'], $routes);

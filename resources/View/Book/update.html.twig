@@ -1,0 +1,18 @@
+{% extends 'layout.html.twig' %}
+
+{% block content %}
+    <h1>Update book</h1>
+    <form action="" method="post">
+        <label>
+            <span>Book title:</span>
+            <input type="text" name="name" placeholder="Book title" value="{{ book.name }}">
+        </label><br>
+        <label>
+            <span>Book description</span>
+            <textarea name="description" placeholder="Book description"> {{ book.description }}</textarea>
+        </label><br>
+        <label>
+            <input type="submit" value="Submit">
+        </label>
+    </form>
+{% endblock %}
