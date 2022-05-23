@@ -108,6 +108,12 @@ class Response
         }
     }
 
+    public function redirect(string $url)
+    {
+        header('Location: ' . $url);
+        exit();
+    }
+
     private function setHeaderHttpStatusMessage($code)
     {
         //header("HTTP/1.1 " , $code, $this->getHttpStatusMessage($code));

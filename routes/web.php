@@ -11,5 +11,9 @@ $routes->set('/', function () {
     Controllers\BookController::index();
 });
 
+$routes->set('/books/create', function (Request $request) {
+    Controllers\BookController::create($request);
+});
+
 
 $router = new Router($_SERVER['REQUEST_URI'], $routes);
