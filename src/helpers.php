@@ -1,6 +1,7 @@
 <?php
 use Mvc\Exceptions\ExceptionHandler;
 use Mvc\Http\Response\Response;
+use Mvc\Providers\DoctrineServiceProvider;
 
 function env(string $key, $default)
 {
@@ -34,4 +35,10 @@ function config(string $config)
 function response()
 {
     return new Response();
+}
+
+function getEntityManager()
+{
+    $doctrine = new DoctrineServiceProvider(config('database'));
+    return $doctrine->provide();
 }
