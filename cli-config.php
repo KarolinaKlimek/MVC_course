@@ -20,3 +20,9 @@ try {
 ConsoleRunner::run(
     new SingleManagerProvider($entityManager),
 );
+
+
+//Run schema tool update
+//For Windows: php vendor/doctrine/orm/bin/doctrine orm:schema-tool:update --force --dump-sql
+//For Linux: php vendor/bin/doctrine orm:schema-tool:update --force --dump-sql
+
