@@ -48,15 +48,45 @@ class __TwigTemplate_8a32de76211e3800f616b6adc710d0ef extends \Twig\Template
         $macros = $this->macros;
         // line 4
         echo "    <h1>Add book</h1>
-    <form action=\"\" method=\"post\">
+    <form method=\"post\">
         <label>
             <span>Book title:</span>
-            <input type=\"text\" name=\"name\" placeholder=\"Book title\">
-        </label><br>
+            <input type=\"text\" name=\"name\" placeholder=\"Book title\"><br>
+            ";
+        // line 9
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "name", [], "any", false, false, false, 9));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 10
+            echo "                <span style=\"color: #ff7300\">";
+            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+            echo "</span><br>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 12
+        echo "        </label><br>
         <label>
             <span>Book description</span>
-            <textarea name=\"description\" placeholder=\"Book description\"></textarea>
-        </label><br>
+            <textarea name=\"description\" placeholder=\"Book description\"></textarea><br>
+            ";
+        // line 16
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "description", [], "any", false, false, false, 16));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 17
+            echo "                <span style=\"color: #ff0000\">";
+            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+            echo "</span><br>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 19
+        echo "        </label><br>
         <label>
             <input type=\"submit\" value=\"Submit\">
         </label>
@@ -76,7 +106,7 @@ class __TwigTemplate_8a32de76211e3800f616b6adc710d0ef extends \Twig\Template
 
     public function getDebugInfo()
     {
-        return array (  50 => 4,  46 => 3,  35 => 1,);
+        return array (  89 => 19,  80 => 17,  76 => 16,  70 => 12,  61 => 10,  57 => 9,  50 => 4,  46 => 3,  35 => 1,);
     }
 
     public function getSourceContext()

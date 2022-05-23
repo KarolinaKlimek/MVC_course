@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Books;
 use Mvc\Http\Request\Request;
+use Mvc\Validation\Validation;
 
 class BookController
 {
@@ -18,20 +19,31 @@ class BookController
 
     public static function create(Request $request)
     {
+        $errors = [];
+
         if(!empty($request->postAll())) {
-            $entityManager = getEntityManager();
-            $book = new Books();
+            $validation = new Validation([
+                'name' =>['required' => true, 'min' => 3, 'max' => 255],
+                'description' => ['required' => true, 'min' => 3, 'max' => 455]
+            ], $request->postAll());
 
-            $book->setName($request->post('name'));
-            $book->setDescription($request->post('description'));
+            if($validation->passesOrFail()) {
+                $entityManager = getEntityManager();
+                $book = new Books();
 
-            $entityManager->persist($book);
-            $entityManager->flush();
+                $book->setName($request->post('name'));
+                $book->setDescription($request->post('description'));
 
-            return response()->redirect('/');
+                $entityManager->persist($book);
+                $entityManager->flush();
+
+                return response()->redirect('/');
+            }
+
+            $errors = $validation->getErrors();
         }
 
-        return response()->view('Book/create.html.twig', ['title' => 'Add book']);
+        return response()->view('Book/create.html.twig', ['title' => 'Add book','book' =>$request->postAll(), 'errors' => $errors]);
     }
 
     public static function update(Request $request)

@@ -2,14 +2,20 @@
 
 {% block content %}
     <h1>Add book</h1>
-    <form action="" method="post">
+    <form method="post">
         <label>
             <span>Book title:</span>
-            <input type="text" name="name" placeholder="Book title">
+            <input type="text" name="name" placeholder="Book title"><br>
+            {% for error in errors.name %}
+                <span style="color: #ff7300">{{ error }}</span><br>
+            {% endfor %}
         </label><br>
         <label>
             <span>Book description</span>
-            <textarea name="description" placeholder="Book description"></textarea>
+            <textarea name="description" placeholder="Book description"></textarea><br>
+            {% for error in errors.description %}
+                <span style="color: #ff0000">{{ error }}</span><br>
+            {% endfor %}
         </label><br>
         <label>
             <input type="submit" value="Submit">

@@ -1,4 +1,8 @@
 {
   "test": "This is test message.",
-  "testParam": "This is test param message of param :param"
+  "testParam": "This is test param message of param :param",
+
+  "validationRequired": "Field :param is required.",
+  "validationMin": "Field :param must contain more characters.",
+  "validationMax": "Field :param must contain less characters."
 }
