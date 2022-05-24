@@ -53,6 +53,9 @@ class Validation
                             case 'max':
                                 $this->maxValidate($key,$this->params[$key], $credentialValue);
                                 break;
+                            case 'recaptcha':
+                                $this->recaptchaValidate($key, $this->params[$key], $credentialValue);
+                                break;
                             default:
                                 throw new ValidationException('There is no ' . $credentialKey . ' validation method.');
                         }
@@ -83,5 +86,21 @@ class Validation
     {
         if(strlen($paramValue) > $credential)
             $this->errors[$paramName]['max'] = $this->messages->get('validationMax', ['param' => $paramName]);
+    }
+
+    private function recaptchaValidate($paramName, $paramValue, $credential)
+    {
+        if($credential) {
+            $recaptchaUrl = 'https://www.google.com/recaptcha/api/siteverify';
+            $recaptchaSecret = config('auth.recaptcha_secret_key');
+            $recaptchaResponse = $paramValue;
+
+            $recaptcha = file_get_contents($recaptchaUrl . '?secret=' . $recaptchaSecret . '&response=' . $recaptchaResponse);
+
+            $recaptcha = json_decode($recaptcha);
+
+            if(!$recaptcha->success || !$recaptcha->score >= 0.5)
+                $this->errors[$paramName]['recaptcha'] = $this->messages->get('validationRecaptcha');
+        }
     }
 }

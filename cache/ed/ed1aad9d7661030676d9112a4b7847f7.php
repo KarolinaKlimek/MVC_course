@@ -25,6 +25,7 @@ class __TwigTemplate_8a32de76211e3800f616b6adc710d0ef extends \Twig\Template
         $this->source = $this->getSourceContext();
 
         $this->blocks = [
+            'head' => [$this, 'block_head'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -43,21 +44,43 @@ class __TwigTemplate_8a32de76211e3800f616b6adc710d0ef extends \Twig\Template
     }
 
     // line 3
-    public function block_content($context, array $blocks = [])
+    public function block_head($context, array $blocks = [])
     {
         $macros = $this->macros;
         // line 4
+        echo "    <script src=\"https://www.google.com/recaptcha/api.js?render=";
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('config')->getCallable(), ["auth.recaptcha_site_key"]), "html", null, true);
+        echo "\"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('";
+        // line 7
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('config')->getCallable(), ["auth.recaptcha_site_key"]), "html", null, true);
+        echo "', {action: 'books'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
+";
+    }
+
+    // line 15
+    public function block_content($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 16
         echo "    <h1>Add book</h1>
     <form method=\"post\">
         <label>
             <span>Book title:</span>
             <input type=\"text\" name=\"name\" placeholder=\"Book title\"><br>
             ";
-        // line 9
+        // line 21
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "name", [], "any", false, false, false, 9));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "name", [], "any", false, false, false, 21));
         foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-            // line 10
+            // line 22
             echo "                <span style=\"color: #ff7300\">";
             echo twig_escape_filter($this->env, $context["error"], "html", null, true);
             echo "</span><br>
@@ -66,17 +89,17 @@ class __TwigTemplate_8a32de76211e3800f616b6adc710d0ef extends \Twig\Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 12
+        // line 24
         echo "        </label><br>
         <label>
             <span>Book description</span>
             <textarea name=\"description\" placeholder=\"Book description\"></textarea><br>
             ";
-        // line 16
+        // line 28
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "description", [], "any", false, false, false, 16));
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "description", [], "any", false, false, false, 28));
         foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
-            // line 17
+            // line 29
             echo "                <span style=\"color: #ff0000\">";
             echo twig_escape_filter($this->env, $context["error"], "html", null, true);
             echo "</span><br>
@@ -85,8 +108,26 @@ class __TwigTemplate_8a32de76211e3800f616b6adc710d0ef extends \Twig\Template
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 19
+        // line 31
         echo "        </label><br>
+        <label>
+            <input type=\"hidden\" name=\"recaptcha\" id=\"recaptchaResponse\"><br>
+            ";
+        // line 34
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "recaptcha", [], "any", false, false, false, 34));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 35
+            echo "                <span style=\"color: #ff7300\">";
+            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+            echo "</span><br>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 37
+        echo "        </label>
         <label>
             <input type=\"submit\" value=\"Submit\">
         </label>
@@ -106,7 +147,7 @@ class __TwigTemplate_8a32de76211e3800f616b6adc710d0ef extends \Twig\Template
 
     public function getDebugInfo()
     {
-        return array (  89 => 19,  80 => 17,  76 => 16,  70 => 12,  61 => 10,  57 => 9,  50 => 4,  46 => 3,  35 => 1,);
+        return array (  130 => 37,  121 => 35,  117 => 34,  112 => 31,  103 => 29,  99 => 28,  93 => 24,  84 => 22,  80 => 21,  73 => 16,  69 => 15,  58 => 7,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()

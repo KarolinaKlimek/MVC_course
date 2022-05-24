@@ -1,16 +1,40 @@
 {% extends 'layout.html.twig' %}
 
+{% block head %}
+    <script src="https://www.google.com/recaptcha/api.js?render={{ config('auth.recaptcha_site_key') }}"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('{{ config('auth.recaptcha_site_key') }}', {action: 'books'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
+{% endblock %}
+
 {% block content %}
     <h1>Update book</h1>
     <form action="" method="post">
         <label>
             <span>Book title:</span>
-            <input type="text" name="name" placeholder="Book title" value="{{ book.name }}">
+            <input type="text" name="name" placeholder="Book title" value="{{ book.name }}"><br>
+            {% for error in errors.name %}
+                <span style="color: #ff7300">{{ error }}</span><br>
+            {% endfor %}
         </label><br>
         <label>
             <span>Book description</span>
-            <textarea name="description" placeholder="Book description"> {{ book.description }}</textarea>
+            <textarea name="description" placeholder="Book description"> {{ book.description }}</textarea><br>
+            {% for error in errors.description %}
+                <span style="color: #ff0000">{{ error }}</span><br>
+            {% endfor %}
         </label><br>
+        <label>
+            <input type="hidden" name="recaptcha" id="recaptchaResponse"><br>
+            {% for error in errors.recaptcha %}
+                <span style="color: #ff7300">{{ error }}</span><br>
+            {% endfor %}
+        </label>
         <label>
             <input type="submit" value="Submit">
         </label>

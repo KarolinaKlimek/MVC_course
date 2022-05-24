@@ -25,6 +25,7 @@ class __TwigTemplate_37379bf92de1cd6899cc95e0a8419662 extends \Twig\Template
         $this->source = $this->getSourceContext();
 
         $this->blocks = [
+            'head' => [$this, 'block_head'],
             'content' => [$this, 'block_content'],
         ];
     }
@@ -43,26 +44,96 @@ class __TwigTemplate_37379bf92de1cd6899cc95e0a8419662 extends \Twig\Template
     }
 
     // line 3
-    public function block_content($context, array $blocks = [])
+    public function block_head($context, array $blocks = [])
     {
         $macros = $this->macros;
         // line 4
+        echo "    <script src=\"https://www.google.com/recaptcha/api.js?render=";
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('config')->getCallable(), ["auth.recaptcha_site_key"]), "html", null, true);
+        echo "\"></script>
+    <script>
+        grecaptcha.ready(function () {
+            grecaptcha.execute('";
+        // line 7
+        echo twig_escape_filter($this->env, call_user_func_array($this->env->getFunction('config')->getCallable(), ["auth.recaptcha_site_key"]), "html", null, true);
+        echo "', {action: 'books'}).then(function (token) {
+                var recaptchaResponse = document.getElementById('recaptchaResponse');
+                recaptchaResponse.value = token;
+            });
+        });
+    </script>
+";
+    }
+
+    // line 15
+    public function block_content($context, array $blocks = [])
+    {
+        $macros = $this->macros;
+        // line 16
         echo "    <h1>Update book</h1>
     <form action=\"\" method=\"post\">
         <label>
             <span>Book title:</span>
             <input type=\"text\" name=\"name\" placeholder=\"Book title\" value=\"";
-        // line 8
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["book"] ?? null), "name", [], "any", false, false, false, 8), "html", null, true);
-        echo "\">
-        </label><br>
+        // line 20
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["book"] ?? null), "name", [], "any", false, false, false, 20), "html", null, true);
+        echo "\"><br>
+            ";
+        // line 21
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "name", [], "any", false, false, false, 21));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 22
+            echo "                <span style=\"color: #ff7300\">";
+            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+            echo "</span><br>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 24
+        echo "        </label><br>
         <label>
             <span>Book description</span>
             <textarea name=\"description\" placeholder=\"Book description\"> ";
-        // line 12
-        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["book"] ?? null), "description", [], "any", false, false, false, 12), "html", null, true);
-        echo "</textarea>
-        </label><br>
+        // line 27
+        echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, ($context["book"] ?? null), "description", [], "any", false, false, false, 27), "html", null, true);
+        echo "</textarea><br>
+            ";
+        // line 28
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "description", [], "any", false, false, false, 28));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 29
+            echo "                <span style=\"color: #ff0000\">";
+            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+            echo "</span><br>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 31
+        echo "        </label><br>
+        <label>
+            <input type=\"hidden\" name=\"recaptcha\" id=\"recaptchaResponse\"><br>
+            ";
+        // line 34
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, ($context["errors"] ?? null), "recaptcha", [], "any", false, false, false, 34));
+        foreach ($context['_seq'] as $context["_key"] => $context["error"]) {
+            // line 35
+            echo "                <span style=\"color: #ff7300\">";
+            echo twig_escape_filter($this->env, $context["error"], "html", null, true);
+            echo "</span><br>
+            ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['error'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 37
+        echo "        </label>
         <label>
             <input type=\"submit\" value=\"Submit\">
         </label>
@@ -82,7 +153,7 @@ class __TwigTemplate_37379bf92de1cd6899cc95e0a8419662 extends \Twig\Template
 
     public function getDebugInfo()
     {
-        return array (  63 => 12,  56 => 8,  50 => 4,  46 => 3,  35 => 1,);
+        return array (  136 => 37,  127 => 35,  123 => 34,  118 => 31,  109 => 29,  105 => 28,  101 => 27,  96 => 24,  87 => 22,  83 => 21,  79 => 20,  73 => 16,  69 => 15,  58 => 7,  51 => 4,  47 => 3,  36 => 1,);
     }
 
     public function getSourceContext()

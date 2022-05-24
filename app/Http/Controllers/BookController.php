@@ -24,7 +24,8 @@ class BookController
         if(!empty($request->postAll())) {
             $validation = new Validation([
                 'name' =>['required' => true, 'min' => 3, 'max' => 255],
-                'description' => ['required' => true, 'min' => 3, 'max' => 455]
+                'description' => ['required' => true, 'min' => 3, 'max' => 455],
+                'recaptcha' => ['recaptcha' => true]
             ], $request->postAll());
 
             if($validation->passesOrFail()) {
@@ -48,19 +49,33 @@ class BookController
 
     public static function update(Request $request)
     {
+
+
         $entityManager = getEntityManager();
         $book = $entityManager->getRepository('App\\Models\\Books')->find($request->get('id'));
 
         if($book && !empty($request->postAll())) {
-            $book->setName($request->post('name'));
-            $book->setDescription($request->post('description'));
+            $validation = new Validation([
+                'name' =>['required' => true, 'min' => 3, 'max' => 255],
+                'description' => ['required' => true, 'min' => 3, 'max' => 455],
+                'recaptcha' => ['recaptcha' => true]
+            ], $request->postAll());
 
-            $entityManager->flush($book);
+            if($validation->passesOrFail()) {
+                $book->setName($request->post('name'));
+                $book->setDescription($request->post('description'));
 
-            return response()->redirect('/');
+                $entityManager->flush($book);
+
+                return response()->redirect('/');
+            }
+
+            $errors = $validation->getErrors();
+            return response()->view('Book/update.html.twig', ['title' => 'Update book', 'book' => $request->postAll(), 'errors' => $errors]);
         }
 
-        return response()->view('Book/update.html.twig', ['title' => 'Add book', 'book' => $book]);
+
+        return response()->view('Book/update.html.twig', ['title' => 'Update book', 'book' => $book]);
     }
 
     public static function destroy(Request $request)

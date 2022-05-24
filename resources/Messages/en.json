@@ -4,5 +4,7 @@
 
   "validationRequired": "Field :param is required.",
   "validationMin": "Field :param must contain more characters.",
-  "validationMax": "Field :param must contain less characters."
+  "validationMax": "Field :param must contain less characters.",
+
+  "validationRecaptcha": "Recaptcha verification failed."
 }
